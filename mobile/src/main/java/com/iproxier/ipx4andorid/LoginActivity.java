@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,9 +30,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.iproxier.ipx4andorid.api.IPXResetClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -188,10 +199,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            if (mAuthTask.doInBackground()) {
-                Intent intent = new Intent(this, DashboardActivity.class);
-                startActivity(intent);
-            }
         }
     }
 
@@ -303,6 +310,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private JSONObject responseData = new JSONObject();
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -312,23 +320,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+            RequestParams requestParams = new RequestParams();
+            requestParams.put("email", mEmail);
+            requestParams.put("password", mPassword);
+
+            JsonHttpResponseHandler responseHandler = new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                    UserLoginTask.this.responseData = response;
+                }
+
+                @Override
+                public void onRetry(int retryNo) {
+                    mAuthTask.cancel(true);
+                }
+
+            };
+
+            IPXResetClient.post("login", requestParams, responseHandler);
 
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                Integer status = responseData.getInt("status");
+                String token = responseData.getString("data");
+                if (status.equals(200) && !token.equals("")) {
+                    return true;
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            // TODO: register the new account here.
             return false;
         }
 
@@ -349,6 +370,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+            mEmailView.setError(getString(R.string.connect_error, Toast.LENGTH_LONG));
+            mEmailView.requestFocus();
+        }
+
+        protected void finish() {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            startActivity(intent);
         }
     }
 }
