@@ -349,6 +349,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Integer status = responseData.getInt("status");
                 String token = responseData.getString("data");
                 if (status.equals(200) && !token.equals("")) {
+                    SharedPreferences tokenSharedPref = LoginActivity.this.getSharedPreferences("IPX_API_TOKEN", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = tokenSharedPref.edit();
+                    editor.putString(IPX_API_TOKEN, token);
+                    editor.commit();
                     return true;
                 }
             } catch (JSONException e) {
