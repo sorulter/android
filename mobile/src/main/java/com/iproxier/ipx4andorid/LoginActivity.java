@@ -3,7 +3,6 @@ package com.iproxier.ipx4andorid;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +10,7 @@ import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -54,6 +54,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedPref = LoginActivity.this.getSharedPreferences("IPX_API_TOKEN", Context.MODE_PRIVATE);
+        String token = sharedPref.getString(IPX_API_TOKEN, "");
 
         if (!token.equals("")) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
