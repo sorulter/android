@@ -3,6 +3,7 @@ package com.iproxier.ipx4andorid;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import android.os.Build;
@@ -66,10 +68,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    public static final String IPX_API_TOKEN = "com.iproxier.ipx.IPX_API_TOKEN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPref = LoginActivity.this.getSharedPreferences("IPX_API_TOKEN", Context.MODE_PRIVATE);
+
+        if (!token.equals("")) {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            startActivity(intent);
+            return;
+        }
+
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
