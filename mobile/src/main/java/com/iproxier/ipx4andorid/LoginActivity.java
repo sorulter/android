@@ -218,6 +218,11 @@ public class LoginActivity extends Activity {
                 }
 
                 @Override
+                public void onFailure(int statusCode, Header[] headers, String body, Throwable throwable){
+                    Log.d("request error:", throwable.toString()+"\nbody:"+body);
+                }
+
+                @Override
                 public void onRetry(int retryNo) {
                     mAuthTask.cancel(true);
                 }
