@@ -13,7 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_dashboard">iProxier VPN</string>
     <string name="connect_error">Connect to Server ERROR</string>
     <string name="menu_item_switch">Switch</string>
     <string name="menu_item_about">About</string>
@@ -24,5 +24,10 @@
     <string name="home_page_url">https://www.iproxier.com/user</string>
     <string name="vpn_connected_status">connected</string>
     <string name="vpn_disconnected_status">disconnected</string>
+    <string name="error_get_data_from_api">[%d] get data from api server error.</string>
+    <string name="flows_over">Notice!You used all flows, please recharge at the website.</string>
+    <string name="get_user_account_success">[%s] Get account info success.</string>
+    <string name="terminated">iProxier terminated.</string>
+    <string name="localserver_stopped">LocalServer stopped.</string>
 
 </resources>
