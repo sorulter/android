@@ -15,4 +15,14 @@
     </string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="connect_error">Connect to Server ERROR</string>
+    <string name="menu_item_switch">Switch</string>
+    <string name="menu_item_about">About</string>
+    <string name="btn_ok">OK</string>
+    <string name="about_info">This the Android client for iProxier.</string>
+    <string name="logout">Logout</string>
+    <string name="home_page">HomePage</string>
+    <string name="home_page_url">https://www.iproxier.com/user</string>
+    <string name="vpn_connected_status">connected</string>
+    <string name="vpn_disconnected_status">disconnected</string>
+
 </resources>
