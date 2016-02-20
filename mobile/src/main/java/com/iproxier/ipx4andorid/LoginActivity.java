@@ -56,10 +56,11 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPref = LoginActivity.this.getSharedPreferences("IPX_API_TOKEN", Context.MODE_PRIVATE);
         String token = sharedPref.getString(IPX_API_TOKEN, "");
 
+        // If have token, redirect to dashboard.
         if (!token.equals("")) {
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
-            return;
+            finish();
         }
 
         setContentView(R.layout.activity_login);
