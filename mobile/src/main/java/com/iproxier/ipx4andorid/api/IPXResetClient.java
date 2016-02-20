@@ -9,10 +9,12 @@ public class IPXResetClient {
     private static SyncHttpClient client = new SyncHttpClient();
 
     public static void get(String url, RequestParams params, JsonHttpResponseHandler responseHandler) {
+        client.setUserAgent("IPX Android");
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(String url, RequestParams params, JsonHttpResponseHandler responseHandler) {
+        client.setUserAgent("IPX Android");
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
