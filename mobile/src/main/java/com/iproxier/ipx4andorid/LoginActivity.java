@@ -240,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences tokenSharedPref = LoginActivity.this.getSharedPreferences("IPX_API_TOKEN", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = tokenSharedPref.edit();
                     editor.putString(IPX_API_TOKEN, token);
-                    editor.commit();
+                    editor.apply();
                     return true;
                 }
             } catch (JSONException e) {
