@@ -273,10 +273,6 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.requestFocus();
         }
 
-        protected void finish() {
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-            startActivity(intent);
-        }
     }
 }
 
