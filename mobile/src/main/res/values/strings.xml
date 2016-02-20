@@ -10,9 +10,6 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_dashboard">iProxier VPN</string>
     <string name="connect_error">Connect to Server ERROR</string>
     <string name="menu_item_switch">Switch</string>
@@ -21,7 +18,6 @@
     <string name="about_info">This the Android client for iProxier.</string>
     <string name="logout">Logout</string>
     <string name="home_page">HomePage</string>
-    <string name="home_page_url">https://www.iproxier.com/user</string>
     <string name="vpn_connected_status">connected</string>
     <string name="vpn_disconnected_status">disconnected</string>
     <string name="error_get_data_from_api">[%d] get data from api server error.</string>
