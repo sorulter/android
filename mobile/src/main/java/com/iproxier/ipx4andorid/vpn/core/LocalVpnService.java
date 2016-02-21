@@ -26,20 +26,17 @@ import com.iproxier.ipx4andorid.DashboardActivity;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -483,8 +480,6 @@ public class LocalVpnService extends VpnService implements Runnable {
 
     private String getIpxApiToken() {
         SharedPreferences sharedPref = this.getSharedPreferences("IPX_API_TOKEN", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("com.iproxier.ipx.IPX_API_TOKEN", "");
-        Log.d(Constant.TAG, "token: "+token);
-        return token;
+        return sharedPref.getString("com.iproxier.ipx.IPX_API_TOKEN", "");
     }
 }
